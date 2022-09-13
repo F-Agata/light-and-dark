@@ -2,15 +2,14 @@ import breakpoints from './breakpoints'
 
 export const theme = {
   colors: {
-    primary: 'orangered',
-    secondary: 'red',
+    bgPrimaryDark: '#0402A3',
+    textDark: '#E3E3E3',
+    bgPrimaryLight: '#E3E3E3',
+    textLight: '#0402A3',
+    Secondary: '#B5B5B5',
   },
-  gradients: {},
   fontWeights: {
     regular: `400`,
-    bold: `700`,
   },
-  fontSizes: {},
-  lineHeight: {},
   breakpoints,
 }
