@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, {useContext} from "react";
 import { Box, TitleAndText } from '../styles'
 import styled, { css } from 'styled-components'
 import { LightOrDarkContext }  from "../context/LightOrDarkContext";
