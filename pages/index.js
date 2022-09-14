@@ -8,12 +8,13 @@ import DishList from "../components/DishList";
 const Home = () => {
 
     const lOrD = useContext(LightOrDarkContext)
+    const yourChoiceLOrD = lOrD.darkVariant ? lOrD.darkVersion : lOrD.lightVersion
 
   return (
       <Box
           width={'100%'}
           m={'0 auto'}
-          bg={lOrD.darkVariant ? 'bgPrimaryDark' : 'bgPrimaryLight'}
+          bg={yourChoiceLOrD.bgc}
           overflow={'hidden'}
           display={'flex'}
           flexDirection={'column'}
@@ -21,8 +22,18 @@ const Home = () => {
           alignItems={'center'}
           p={40}
       >
-          <TitleAndText variant={'title1'} mb={20} color={lOrD.darkVariant ? 'textDark' : 'textLight' }> lista ulubionych potraw</TitleAndText>
-          <TitleAndText variant={'title2'} mb={20} color={lOrD.darkVariant ? 'textDark' : 'textLight' }>na liście jest  <TitleAndText as="span" variant={'title1'}>22</TitleAndText> pozycji</TitleAndText>
+          <TitleAndText variant={'title1'} mb={20}
+                        color={yourChoiceLOrD.tc}
+          >
+              lista ulubionych potraw
+          </TitleAndText>
+          <TitleAndText variant={'title2'} mb={20}
+                        color={yourChoiceLOrD.tc}
+          >
+              na liście jest
+              <TitleAndText as="span" variant={'title1'}>22</TitleAndText>
+              pozycji
+          </TitleAndText>
           <DishList/>
           <Box
               width={'100%'}
@@ -33,7 +44,7 @@ const Home = () => {
               alignItems={'center'}
               mt={40}
           >
-              <ButtonLOrD lOrDDarkVariant={lOrD.darkVariant} onClick={lOrD.toggleLD}>light or dark version</ ButtonLOrD>
+              <ButtonLOrD  yourChoiceLOrD={yourChoiceLOrD} onClick={lOrD.toggleLD}>light  or  dark  version</ ButtonLOrD>
           </Box>
       </Box>
   )
@@ -42,13 +53,14 @@ const Home = () => {
 export default Home
 
 const ButtonLOrD = styled.button`
- padding: 10px;
+ padding: 20px;
   border: 2px solid white;
+  letter-spacing: 2px;
+  border-radius: 10px;
   cursor: pointer;
   transition: 0.6s;
-  ${({ theme, lOrDDarkVariant }) => `
-        background: ${lOrDDarkVariant ? theme.colors.bgPrimaryLight : theme.colors.bgPrimaryDark};
-        color: ${lOrDDarkVariant ? theme.colors.bgPrimaryDark : theme.colors.bgPrimaryLight};
-      `};
-
+  ${({ yourChoiceLOrD }) => css`
+        background: ${yourChoiceLOrD.bgc};
+        color: ${yourChoiceLOrD.tc};
+             `};
 `

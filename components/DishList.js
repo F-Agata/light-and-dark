@@ -1,29 +1,31 @@
 import React, {useContext} from "react";
-import { Box, TitleAndText } from '../styles'
+import { Box } from '../styles'
 import styled, { css } from 'styled-components'
 import { LightOrDarkContext }  from "../context/LightOrDarkContext";
 
 const DishList = () => {
 
     const lOrD = useContext(LightOrDarkContext)
+    const yourChoiceLOrD = lOrD.darkVariant ? lOrD.darkVersion : lOrD.lightVersion;
+    console.log(yourChoiceLOrD.tc)
 
     return (
-        <Box>
+        <Box   width={'80%'}>
             <StyledNavigationUl>
-                <StyledNavigationLi>
-                    1 xfgvfvgfvfbcfb
+                <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD}>
+                    1 zupa pomidorowa z makaronem
+                </StyledNavigationLi >
+                <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD}>
+                   2 pizza z pieczarkami
                 </StyledNavigationLi>
-                <StyledNavigationLi>
-                   2 xfgvfvgfvfbcfb
+                <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD}>
+                   3 owsianka na słodko
                 </StyledNavigationLi>
-                <StyledNavigationLi>
-                   3 xfgvfvgfvfbcfb
+                <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD}>
+                    4 rolada, schabowy, czerwona kapusta
                 </StyledNavigationLi>
-                <StyledNavigationLi>
-                    4 xfgvfvgfvfbcfb
-                </StyledNavigationLi>
-                <StyledNavigationLi>
-                   5 xfgvfvgfvfbcfb
+                <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD}>
+                   5 zupa dyniowa z mlekiem kokosowym
                 </StyledNavigationLi>
             </StyledNavigationUl>
         </Box>
@@ -33,35 +35,30 @@ const DishList = () => {
 export default DishList
 
 const StyledNavigationUl = styled.ul`
-  border: aquamarine 2px solid;
-  //display: flex;
-  //justify-content: flex-end;
-  //@media (min-width: 1024px) {
-  //  justify-content: space-between;
-  //}
+width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  ${({ theme }) => css`
+    background-color: ${theme.colors.secondary};
+  `};
 `
 
 const StyledNavigationLi = styled.li`
   list-style: none;
-  padding: 10px ;
+  padding: 10px 20px;
+  margin: 10px 0px;
   cursor: pointer;
-  transition: 0.3s;
-  // :hover {
-  //   ${({ theme }) => css`
-  //     font-weight: ${theme.fontWeights.fontBold};
-  //     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  //   `};
-  // }
-  // :active {
-  //   ${({ theme }) => css`
-  //     font-weight: ${theme.fontWeights.fontBold};
-  //     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  //   `};
-  //   :focus {
-  //     ${({ theme }) => css`
-  //       font-weight: ${theme.fontWeights.fontBold};
-  //       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  //     `};
-  //   }
-  // }
+  border-radius: 10px;
+  ${({ yourChoiceLOrD }) => css`
+    background: ${yourChoiceLOrD.bgc};
+    color: ${yourChoiceLOrD.tc};
+  `};
+   :hover {
+     text-decoration: line-through;
+   }
+  
 `

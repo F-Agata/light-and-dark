@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-          <LightOrDarkContextProvider>
+          <LightOrDarkContextProvider theme={theme}>
              <Box
                      maxWidth={1000}
                      minWidth={375}

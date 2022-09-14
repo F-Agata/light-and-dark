@@ -4,7 +4,10 @@ export const LightOrDarkContext = createContext();
 
 
 const LightOrDarkContextProvider = ( props ) => {
+
     const [darkVariant, setDarkVariant] = useState(false)
+    const lightVersion = {bgc:  props.theme.colors.bgLight, tc: props.theme.colors.textLight}
+    const darkVersion = {bgc:  props.theme.colors.bgDark, tc: props.theme.colors.textDark}
 
     const toggleLD = () => {
         setDarkVariant(preDarkVariant => !preDarkVariant)
@@ -12,7 +15,9 @@ const LightOrDarkContextProvider = ( props ) => {
 
     const value = {
         darkVariant: darkVariant,
-        toggleLD: toggleLD
+        toggleLD: toggleLD,
+        lightVersion: lightVersion,
+        darkVersion: darkVersion,
     }
 
     return (
