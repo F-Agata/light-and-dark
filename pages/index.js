@@ -39,6 +39,7 @@ const Home = () => {
           </TitleAndText>
           <DishList/>
           <Box
+              // border={'2px solid red'}
               width={'100%'}
               m={'0 auto'}
               display={'flex'}

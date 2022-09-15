@@ -17,11 +17,11 @@ export const TitleAndText = styled.p`
          fontSize: '24px',
         lineHeight: '120%',
       },
-      textSmall: {
+      textLarge: {
             fontSize: '16px',
         lineHeight: '110%',
       },
-      textLarge: {
+      textSmall: {
              fontSize: '12px',
         lineHeight: '110%',
       },

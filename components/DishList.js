@@ -1,8 +1,9 @@
-import React, {useState, useContext} from "react";
+import React, { useContext} from "react";
 import { Box } from '../styles'
 import styled, { css } from 'styled-components'
 import { LightOrDarkContext }  from "../context/LightOrDarkContext";
 import {MealsContext} from "../context/MealsContext";
+import NewDishForm from "./NewDishForm";
 
 const DishList = () => {
 
@@ -11,17 +12,16 @@ const DishList = () => {
 
     const mealsOperations = useContext(MealsContext)
     const mealsArray = mealsOperations.meals
-    console.log(mealsArray.length)
-    console.log(mealsArray)
-
-   const mealItem = mealsArray.map((item) => (
-       <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD} key={item.id}>
-           {item.name}
-       </StyledNavigationLi >
-     ))
+    console.log( mealsOperations.meals)
 
     return (
-        <Box   width={'80%'}>
+        <Box   width={'80%'}
+               // border={'2px solid blue'}
+               display={'flex'}
+               flexDirection={'column'}
+               justifyContent={'center'}
+               alignItems={'center'}
+        >
             <StyledNavigationUl>
                 {mealsArray.length === 0 &&
                 <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD}>
@@ -29,11 +29,12 @@ const DishList = () => {
                 </StyledNavigationLi>
                 }
                 {mealsArray.map((item) => (
-                        <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD} key={item.id}>
-                            {item.name}
+                        <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD} key={item.idDish}>
+                            {item.nameDish}
                         </StyledNavigationLi >
                 ))}
             </StyledNavigationUl>
+            <NewDishForm/>
         </Box>
     )
 }
@@ -43,12 +44,12 @@ export default DishList
 const StyledNavigationUl = styled.ul`
 width: 100%;
   border: 2px solid white;
+  border-radius: 10px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
   ${({ theme }) => css`
     background-color: ${theme.colors.secondary};
   `};

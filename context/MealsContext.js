@@ -9,13 +9,14 @@ const MealsContextProvider = ( props ) => {
     const [meals, setMeals] = useState([ ])
 
 
-    const addmeals = () => {
-        setMeals([...meals], {name: 'sdfsf', id: nanoid()})
+    const addDishToArray = (nameFromValue) => {
+        console.log(nameFromValue)
+        setMeals([...meals, {nameDish: nameFromValue, idDish: nanoid()}])
     }
 
     const value = {
         meals: meals,
-        addmeals: addmeals,
+        addDishToArray: addDishToArray,
            }
 
     return (
