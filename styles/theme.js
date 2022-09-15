@@ -2,10 +2,10 @@ import breakpoints from './breakpoints'
 
 export const theme = {
   colors: {
-    bgDark: '#0d0d55',
+    bgDark: '#282828',
     textDark: '#E3E3E3',
     bgLight: '#E3E3E3',
-    textLight: '#0d0d55',
+    textLight: '#282828',
     secondary: '#B5B5B5',
   },
   fontWeights: {

@@ -1,8 +1,8 @@
-import LightOrDarkProvider from "/context/LightOrDarkContext"
 import '../styles/globals.css'
 import { ThemeProvider } from 'styled-components'
 import { Box, GlobalStyle, theme } from '../styles'
 import LightOrDarkContextProvider from "/context/LightOrDarkContext";
+import MealsContextProvider from "../context/MealsContext";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -10,7 +10,8 @@ function MyApp({ Component, pageProps }) {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
           <LightOrDarkContextProvider theme={theme}>
-             <Box
+              <MealsContextProvider>
+                 <Box
                      maxWidth={1000}
                      minWidth={375}
                      width={'100%'}
@@ -20,8 +21,9 @@ function MyApp({ Component, pageProps }) {
                      flexDirection={'column'}
                      justifyContent={'center'}
         >
-                <Component {...pageProps} />
-             </Box>
+                  <Component {...pageProps} />
+                </Box>
+              </MealsContextProvider>
           </LightOrDarkContextProvider >
       </ThemeProvider>
     </>

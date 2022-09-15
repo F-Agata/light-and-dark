@@ -3,12 +3,15 @@ import { Box, TitleAndText } from '../styles'
 import styled, { css } from 'styled-components'
 import { LightOrDarkContext }  from "../context/LightOrDarkContext";
 import DishList from "../components/DishList";
+import {MealsContext} from "../context/MealsContext";
 
 
 const Home = () => {
 
     const lOrD = useContext(LightOrDarkContext)
     const yourChoiceLOrD = lOrD.darkVariant ? lOrD.darkVersion : lOrD.lightVersion
+
+    const mealsOperations = useContext(MealsContext)
 
   return (
       <Box
@@ -31,7 +34,7 @@ const Home = () => {
                         color={yourChoiceLOrD.tc}
           >
               na liście jest
-              <TitleAndText as="span" variant={'title1'}>22</TitleAndText>
+              <TitleAndText as="span" variant={'title1'}> {mealsOperations.meals.length} </TitleAndText>
               pozycji
           </TitleAndText>
           <DishList/>

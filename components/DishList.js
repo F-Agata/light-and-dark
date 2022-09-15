@@ -1,32 +1,38 @@
-import React, {useContext} from "react";
+import React, {useState, useContext} from "react";
 import { Box } from '../styles'
 import styled, { css } from 'styled-components'
 import { LightOrDarkContext }  from "../context/LightOrDarkContext";
+import {MealsContext} from "../context/MealsContext";
 
 const DishList = () => {
 
     const lOrD = useContext(LightOrDarkContext)
     const yourChoiceLOrD = lOrD.darkVariant ? lOrD.darkVersion : lOrD.lightVersion;
-    console.log(yourChoiceLOrD.tc)
+
+    const mealsOperations = useContext(MealsContext)
+    const mealsArray = mealsOperations.meals
+    console.log(mealsArray.length)
+    console.log(mealsArray)
+
+   const mealItem = mealsArray.map((item) => (
+       <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD} key={item.id}>
+           {item.name}
+       </StyledNavigationLi >
+     ))
 
     return (
         <Box   width={'80%'}>
             <StyledNavigationUl>
+                {mealsArray.length === 0 &&
                 <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD}>
-                    1 zupa pomidorowa z makaronem
-                </StyledNavigationLi >
-                <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD}>
-                   2 pizza z pieczarkami
+                    jeszcze nie wybrałeś ulubionej potrawy
                 </StyledNavigationLi>
-                <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD}>
-                   3 owsianka na słodko
-                </StyledNavigationLi>
-                <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD}>
-                    4 rolada, schabowy, czerwona kapusta
-                </StyledNavigationLi>
-                <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD}>
-                   5 zupa dyniowa z mlekiem kokosowym
-                </StyledNavigationLi>
+                }
+                {mealsArray.map((item) => (
+                        <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD} key={item.id}>
+                            {item.name}
+                        </StyledNavigationLi >
+                ))}
             </StyledNavigationUl>
         </Box>
     )
@@ -36,6 +42,7 @@ export default DishList
 
 const StyledNavigationUl = styled.ul`
 width: 100%;
+  border: 2px solid white;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -60,5 +67,4 @@ const StyledNavigationLi = styled.li`
    :hover {
      text-decoration: line-through;
    }
-  
 `
