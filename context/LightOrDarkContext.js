@@ -14,10 +14,10 @@ const LightOrDarkContextProvider = ( props ) => {
     }
 
     const value = {
-        darkVariant: darkVariant,
-        toggleLD: toggleLD,
-        lightVersion: lightVersion,
-        darkVersion: darkVersion,
+        darkVariant,
+        toggleLD,
+        lightVersion,
+        darkVersion,
     }
 
     return (

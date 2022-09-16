@@ -11,7 +11,7 @@ const NewDishForm = () => {
     const lOrD = useContext(LightOrDarkContext)
     const yourChoiceLOrD = lOrD.darkVariant ? lOrD.darkVersion : lOrD.lightVersion;
 
-    const mealsOperations = useContext(MealsContext)
+    const {addDishToArray} = useContext(MealsContext)
 
     const handleChange = (e) => {
         setNameFromValue(e.target.value)
@@ -20,7 +20,9 @@ const NewDishForm = () => {
     const  handleSubmit = (e) => {
         e.preventDefault();
         console.log(nameFromValue)
-        mealsOperations.addDishToArray(nameFromValue)
+        addDishToArray(nameFromValue)
+        setNameFromValue('')
+
     }
 
     return (

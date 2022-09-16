@@ -10,9 +10,11 @@ const DishList = () => {
     const lOrD = useContext(LightOrDarkContext)
     const yourChoiceLOrD = lOrD.darkVariant ? lOrD.darkVersion : lOrD.lightVersion;
 
-    const mealsOperations = useContext(MealsContext)
-    const mealsArray = mealsOperations.meals
-    console.log( mealsOperations.meals)
+    // const mealsOperations = useContext(MealsContext)
+    // const mealsArray = mealsOperations.meals
+    // console.log( mealsOperations.meals)
+
+    const {meals, removeDishFromArray} = useContext(MealsContext)
 
     return (
         <Box   width={'80%'}
@@ -23,13 +25,26 @@ const DishList = () => {
                alignItems={'center'}
         >
             <StyledNavigationUl>
-                {mealsArray.length === 0 &&
-                <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD}>
+                {/*{mealsArray.length !== 0 ?*/}
+                {/*    {mealsArray.map(item => (*/}
+                {/*            <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD} key={item.idDish}>*/}
+                {/*                {item.nameDish}*/}
+                {/*            </StyledNavigationLi>*/}
+                {/*        ))}*/}
+                {/*    :*/}
+                {/*<StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD}>*/}
+                {/*    jeszcze nie wybrałeś ulubionej potrawy*/}
+                {/*</StyledNavigationLi>*/}
+                {/*}*/}
+
+
+                {meals.length === 0 &&
+                <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD} withoutCrossingOut >
                     jeszcze nie wybrałeś ulubionej potrawy
                 </StyledNavigationLi>
                 }
-                {mealsArray.map((item) => (
-                        <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD} key={item.idDish}>
+                {meals.map((item) => (
+                        <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD} key={item.idDish} onClick={() => removeDishFromArray(item.idDish)}>
                             {item.nameDish}
                         </StyledNavigationLi >
                 ))}
@@ -66,6 +81,7 @@ const StyledNavigationLi = styled.li`
     color: ${yourChoiceLOrD.tc};
   `};
    :hover {
-     text-decoration: line-through;
+     text-decoration: ${(props) => props.withoutCrossingOut ? 'none' : 'line-through'};
+  
    }
 `

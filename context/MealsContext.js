@@ -14,9 +14,14 @@ const MealsContextProvider = ( props ) => {
         setMeals([...meals, {nameDish: nameFromValue, idDish: nanoid()}])
     }
 
+    const removeDishFromArray = (id) => {
+        setMeals(meals.filter(item => item.idDish !==id))
+    }
+
     const value = {
-        meals: meals,
-        addDishToArray: addDishToArray,
+        meals,
+        addDishToArray,
+        removeDishFromArray
            }
 
     return (
