@@ -1,63 +1,56 @@
-import React, { useContext} from "react";
+import React, { useContext } from 'react'
 import { Box } from '../styles'
 import styled, { css } from 'styled-components'
-import { LightOrDarkContext }  from "../context/LightOrDarkContext";
-import {MealsContext} from "../context/MealsContext";
-import NewDishForm from "./NewDishForm";
+import { LightOrDarkContext } from '../context/LightOrDarkContext'
+import { MealsContext } from '../context/MealsContext'
+import NewDishForm from './NewDishForm'
 
 const DishList = () => {
+  const lOrD = useContext(LightOrDarkContext)
+  const yourChoiceLOrD = lOrD.darkVariant ? lOrD.darkVersion : lOrD.lightVersion
 
-    const lOrD = useContext(LightOrDarkContext)
-    const yourChoiceLOrD = lOrD.darkVariant ? lOrD.darkVersion : lOrD.lightVersion;
+  const { meals, removeDishFromArray } = useContext(MealsContext)
 
-    // const mealsOperations = useContext(MealsContext)
-    // const mealsArray = mealsOperations.meals
-    // console.log( mealsOperations.meals)
+  return (
+    <Box
+      width={'80%'}
+      display={'flex'}
+      flexDirection={'column'}
+      justifyContent={'center'}
+      alignItems={'center'}
+    >
+      {meals.length === 0 ? (
+        <StyledNavigationUl>
+          <StyledNavigationLi
+            yourChoiceLOrD={yourChoiceLOrD}
+            withoutCrossingOut
+          >
+            jeszcze nie wybrałeś ulubionej potrawy
+          </StyledNavigationLi>
+        </StyledNavigationUl>
+      ) : (
+        <StyledNavigationUl>
+          {meals.map((item) => (
+            <StyledNavigationLi
+              yourChoiceLOrD={yourChoiceLOrD}
+              key={item.idDish}
+              onClick={() => removeDishFromArray(item.idDish)}
+            >
+              {item.nameDish}
+            </StyledNavigationLi>
+          ))}
+        </StyledNavigationUl>
+      )}
 
-    const {meals, removeDishFromArray} = useContext(MealsContext)
-
-    return (
-        <Box   width={'80%'}
-               // border={'2px solid blue'}
-               display={'flex'}
-               flexDirection={'column'}
-               justifyContent={'center'}
-               alignItems={'center'}
-        >
-            <StyledNavigationUl>
-                {/*{mealsArray.length !== 0 ?*/}
-                {/*    {mealsArray.map(item => (*/}
-                {/*            <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD} key={item.idDish}>*/}
-                {/*                {item.nameDish}*/}
-                {/*            </StyledNavigationLi>*/}
-                {/*        ))}*/}
-                {/*    :*/}
-                {/*<StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD}>*/}
-                {/*    jeszcze nie wybrałeś ulubionej potrawy*/}
-                {/*</StyledNavigationLi>*/}
-                {/*}*/}
-
-
-                {meals.length === 0 &&
-                <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD} withoutCrossingOut >
-                    jeszcze nie wybrałeś ulubionej potrawy
-                </StyledNavigationLi>
-                }
-                {meals.map((item) => (
-                        <StyledNavigationLi yourChoiceLOrD={yourChoiceLOrD} key={item.idDish} onClick={() => removeDishFromArray(item.idDish)}>
-                            {item.nameDish}
-                        </StyledNavigationLi >
-                ))}
-            </StyledNavigationUl>
-            <NewDishForm/>
-        </Box>
-    )
+      <NewDishForm />
+    </Box>
+  )
 }
 
 export default DishList
 
 const StyledNavigationUl = styled.ul`
-width: 100%;
+  width: 100%;
   border: 2px solid white;
   border-radius: 10px;
   padding: 10px;
@@ -79,9 +72,12 @@ const StyledNavigationLi = styled.li`
   ${({ yourChoiceLOrD }) => css`
     background: ${yourChoiceLOrD.bgc};
     color: ${yourChoiceLOrD.tc};
+    border: 2px solid ${yourChoiceLOrD.bgc};
   `};
-   :hover {
-     text-decoration: ${(props) => props.withoutCrossingOut ? 'none' : 'line-through'};
-  
-   }
+  :hover {
+    ${({ withoutCrossingOut }) => css`
+      text-decoration: ${withoutCrossingOut ? 'none' : 'line-through'};
+      border: 2px solid ${withoutCrossingOut ? 'transparent' : 'white'};
+    `};
+  }
 `
